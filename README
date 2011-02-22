@@ -1,0 +1,17 @@
+;; -*-muse-*- mode
+
+Equations and simple models that follow from the gas kinetic theory.
+
+Basic applications:
+ - equation of state
+ - collisions
+ - transport-coefficients
+ - speeds & distributions
+ 
+More complex ones:
+ - heat transfer between parallel plates
+
+
+References
+ - G. A. Bird, *Molecular Gas Dynamics and the Direct Simulation of Gas
+   Flows*, Oxford Science Publications, 2003
