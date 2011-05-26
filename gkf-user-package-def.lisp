@@ -1,5 +1,5 @@
 ;; Mirko Vukovic
-;; Time-stamp: <2011-02-22 09:58:08 gkf-user-package-def.lisp>
+;; Time-stamp: <2011-05-10 09:43:11EDT gkf-user-package-def.lisp>
 ;; 
 ;; Copyright 2011 Mirko Vukovic
 ;; Distributed under the terms of the GNU General Public License
@@ -17,7 +17,8 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(defpackage :gkf-user
+(defpackage :gas-kinetic-formulary-user
+  (:nicknames :gkf-user)
   (:use :cl :gas-kinetic-formulary
 	:mv-grid :mv-gnuplot )
   (:documentation "Package for deploying applications on top of the

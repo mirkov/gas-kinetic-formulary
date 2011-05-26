@@ -1,5 +1,22 @@
+2011-05-10  Mirko Vukovic  <Mirko Vukovic <mirko.vukovic@us.tel.com>>
+
+	* conductances.lisp: New file for conductance formuae
+	(orifice-reduced-conductance): Added formula for reduced orifice
+	conductance
+
+2011-05-09  Mirko Vukovic  <Mirko Vukovic <mirko.vukovic@us.tel.com>>
+
+	* speeds.lisp: Changed all Bird equation references to
+	Bird1994-XYZ
+	(beta): Fixed beta, and modified its test.  I had an error in the
+	mass term.  One has to be careful when using amu's to specify the
+	molecular mass.  Molar mass in kg is 1e-3 amu
+
+	* fundamental-parameters.lisp: Added new file for fundamental
+	parameters.  Not perfect, as it depends on speeds.lisp
+
 2011-02-22    <977315@WTEHDZYYN71>
 
-	* gas-kinetic-formulary/gkf-speeds.lisp (beta): New file, just for
+	* gas-kinetic-formulary/speeds.lisp: New file, just for
 	velocities
 

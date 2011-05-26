@@ -1,5 +1,5 @@
 ;; Mirko Vukovic
-;; Time-stamp: <2011-02-22 10:00:04 gas-kinetic-formulary.asd>
+;; Time-stamp: <2011-05-10 10:51:48EDT gas-kinetic-formulary.asd>
 ;; 
 ;; Copyright 2011 Mirko Vukovic
 ;; Distributed under the terms of the GNU General Public License
@@ -34,9 +34,12 @@
 	    :depends-on ("gkf-setup")
 	    :components
 	    ((:file "speeds")
+	     (:file "fundamental-parameters"
+		    :depends-on ("speeds"))
 	     (:file "transport-coefficients")
 	     (:file "collisions")
-	     (:file "equation-of-state"))))
+	     (:file "equation-of-state")
+	     (:file "conductances"))))
   :depends-on (:my-utils
 	       :physics-constants
 	       :lisp-unit
@@ -54,4 +57,6 @@
 	    :depends-on ("gkfu-setup")
 	    :components
 	    ((:file "gkf-user"))))
-  :depends-on (:gas-kinetic-formulary))
+  :depends-on (:gas-kinetic-formulary
+	       :mv-grid-utils
+	       :mv-gnuplot))

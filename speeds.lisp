@@ -1,5 +1,5 @@
 ;; Mirko Vukovic
-;; Time-stamp: <2011-02-22 09:46:30 speeds.lisp>
+;; Time-stamp: <2011-05-10 11:25:04EDT speeds.lisp>
 ;; 
 ;; Copyright 2011 Mirko Vukovic
 ;; Distributed under the terms of the GNU General Public License
@@ -22,12 +22,20 @@
 (export '(beta c_m c_m1 c_a c_a1 c_s c_s1))
 
 (define-test beta
-    (assert-numerical-equal 1.0 (beta 1.0 (* 2 +R+)))
-  (assert-numerical-equal 2.0 (beta 0.25 (* 2 +R+))))
+  (let ((*epsilon* 1e-4)
+	(molar-mass-g 40))
+    (assert-numerical-equal (sqrt (/ (* 2 +kb+ 300.0)
+				     (* molar-mass-g +amu+)))
+			    (/ (beta 300.0 (* molar-mass-g 1e-3))))))
 
-(defun beta (T-K m-amu)
-  "(B-4.1)"
-  (sqrt (/ m
+(defun beta (T-K m-molar-kg)
+  "Inverse characteristic velocity (Bird1994-4.1)
+
+ sqrt (m-molecular-kg / 2 k T), or sqrt (m-molar-kg / 2 R T)
+
+NOTE: the molar mass is in kg.  Thus for hydrogen, you use 1e-3
+ (approximately), not 1."
+  (sqrt (/ m-molar-kg
 	   (* 2 +R+ T-k))))
 
 (define-test c-m-a-s
@@ -37,29 +45,29 @@
 
 
 (defun c_m (beta)
-  "(B-4.7)"
+  "(Bird1994-4.7)"
   (/ beta))
 
 (defun c_m1 (T-K m-amu)
-  "(B-4.7)"
+  "(Bird1994-4.7)"
   (/ (beta T-K m-amu)))
 
 (defun c_a (beta)
-  "(B-4.8)"
+  "(Bird1994-4.8)"
   (/ 2
      (* (sqrt pi) beta)))
 
 (defun c_a1 (T-K m-amu)
-  "(B-4.8)"
+  "(Bird1994-4.8)"
   (/ 2
      (* (sqrt pi) (beta T-K m-amu))))
 
 (defun c_s (beta)
-  "(B-4.9)"
+  "(Bird1994-4.9)"
   (* (sqrt 1.5) beta))
 
 (defun c_s1 (T-K m-amu)
-  "(B-4.9)"
+  "(Bird1994-4.9)"
   (* (sqrt 1.5) (beta T-K m-amu)))
 
 

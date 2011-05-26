@@ -1,5 +1,5 @@
 ;; Mirko Vukovic
-;; Time-stamp: <2011-02-22 09:45:38 equation-of-state.lisp>
+;; Time-stamp: <2011-05-10 09:44:25EDT equation-of-state.lisp>
 ;; 
 ;; Copyright 2011 Mirko Vukovic
 ;; Distributed under the terms of the GNU General Public License
@@ -18,8 +18,8 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-(export '(n p))
 (in-package :gas-kinetic-formulary)
+(export '(n p))
 
 
 (define-test gas-number-density
