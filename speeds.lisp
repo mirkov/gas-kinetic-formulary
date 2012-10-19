@@ -1,5 +1,5 @@
 ;; Mirko Vukovic
-;; Time-stamp: <2011-05-10 11:25:04EDT speeds.lisp>
+;; Time-stamp: <2012-06-21 19:34:07 speeds.lisp>
 ;; 
 ;; Copyright 2011 Mirko Vukovic
 ;; Distributed under the terms of the GNU General Public License
@@ -39,35 +39,52 @@ NOTE: the molar mass is in kg.  Thus for hydrogen, you use 1e-3
 	   (* 2 +R+ T-k))))
 
 (define-test c-m-a-s
-    (assert-numerical-equal 1.0 (c-m 1.0))
-  (assert-numerical-equal (/ 2 (sqrt pi)) (c-a 1.0))
-  (assert-numerical-equal (sqrt 1.5) (c-s 1.0)))
+  (assert-numerical-equal 1.0 (c_m 1.0))
+  (assert-numerical-equal (/ 2 (sqrt +pi+)) (c_a 1.0))
+  (assert-numerical-equal (sqrt 1.5) (c_s 1.0)))
 
 
 (defun c_m (beta)
-  "(Bird1994-4.7)"
+  "Most probable molecular thermal speed (Bird1994-4.7)
+
+c_m=1/beta"
   (/ beta))
 
-(defun c_m1 (T-K m-amu)
-  "(Bird1994-4.7)"
-  (/ (beta T-K m-amu)))
+(defun c_m1 (T-K m-molar-kg)
+  "Most probable thermal speed, in terms of temperature and molar
+  mass (in kg) (Bird1994-4.7)
+
+ (sqrt (/ (* 2 k T)
+          m))"
+  (/ (beta T-K m-molar-kg)))
 
 (defun c_a (beta)
-  "(Bird1994-4.8)"
-  (/ 2
-     (* (sqrt pi) beta)))
+  "Average thermal speed (Bird1994-4.8)
 
-(defun c_a1 (T-K m-amu)
-  "(Bird1994-4.8)"
+2c_m/sqrt pi"
   (/ 2
-     (* (sqrt pi) (beta T-K m-amu))))
+     (* (sqrt +pi+) beta)))
+
+(defun c_a1 (T-K m-molar-kg)
+  "Average thermal speed in terms of temperature and molar
+  mass (in-kg) (Bird1994-4.8)
+
+2c_m/sqrt pi"
+  (/ 2
+     (* (sqrt +pi+) (beta T-K m-molar-kg))))
 
 (defun c_s (beta)
-  "(Bird1994-4.9)"
+  "Root mean tharmal speed (Bird1994-4.9)
+
+ (sqrt 1.5)/beta"
   (* (sqrt 1.5) beta))
 
-(defun c_s1 (T-K m-amu)
-  "(Bird1994-4.9)"
-  (* (sqrt 1.5) (beta T-K m-amu)))
+(defun c_s1 (T-K m-molar-kg)
+  "Root mean tharmal speed in terms of temperature and molar
+  mass (in-kg) (Bird1994-4.9)
+
+ (sqrt 1.5)/beta"
+
+  (* (sqrt 1.5) (beta T-K m-molar-kg)))
 
 

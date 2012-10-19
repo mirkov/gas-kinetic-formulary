@@ -1,5 +1,5 @@
 ;; Mirko Vukovic
-;; Time-stamp: <2011-05-10 10:51:48EDT gas-kinetic-formulary.asd>
+;; Time-stamp: <2012-06-06 10:03:12 gas-kinetic-formulary.asd>
 ;; 
 ;; Copyright 2011 Mirko Vukovic
 ;; Distributed under the terms of the GNU General Public License
@@ -23,40 +23,77 @@
   :version "0.1"
   :description "Mirko's gas-kinetic formulary"
   :components
-  ((:module "gkf-setup"
-	    :pathname "./"
+  ((:module "package-setup"
+	    :pathname #p"./"
 	    :components
-	    ((:file "gas-kinetic-formulary-package-def")
-	     (:file "abbrevs+defs"
-		    :depends-on ("gas-kinetic-formulary-package-def"))))
-   (:module "gkf-components"
-	    :pathname "./"
-	    :depends-on ("gkf-setup")
+	    ((:file "gas-kinetic-formulary-package-def")))
+   (:module "utilities"
+	    :pathname #p"./"
+	    :depends-on ("package-setup")
+	    :components
+	    ((:file "abbrevs+defs")
+	     (:file "two-species-function-utilities")))
+   (:module "collisions"
+	    :pathname #p"./"
+	    :depends-on ("utilities")
+	    :components
+	    ((:file "collision-parameters")
+	     #|(:file "hs-collision-integrals")|#
+	     (:file "collision-integrals")))
+   (:module "formulary"
+	    :pathname #p"./"
+	    :depends-on ("package-setup")
+	    :serial t
 	    :components
 	    ((:file "speeds")
 	     (:file "fundamental-parameters"
 		    :depends-on ("speeds"))
 	     (:file "transport-coefficients")
-	     (:file "collisions")
 	     (:file "equation-of-state")
-	     (:file "conductances"))))
-  :depends-on (:my-utils
-	       :physics-constants
+	     (:file "fluxes"
+		    :depends-on ("speeds"))
+	     (:file "conductances")))
+   (:module "mccormack-transport-coeffs-setup"
+	    :pathname #p"mccormack-transport-coeffs/"
+	    :depends-on ("utilities" "collisions" "formulary")
+	    :components((:file "helper-macros")
+			(:file "collision-freqs"
+			       #|:depends-on ("helper-macros")|#)
+			;; modified naming convention
+			(:file "collision-freqs1")))
+   (:module "mccormack-transport-coeffs"
+	    :pathname #p"mccormack-transport-coeffs/"
+	    :depends-on ("mccormack-transport-coeffs-setup")
+	    :components ((:file "viscosity")
+			 (:file "thermal-conductivity")
+			 (:file "diffusivity")
+			 (:file "thermal-diffusivity")))
+   (:module "mixtures"
+	    :pathname #p"./"
+	    :depends-on ("utilities")
+	    :components ((:file "mixture-parameters"))))
+  :depends-on (:split-sequence
+	       :alexandria
 	       :lisp-unit
-	       :my-lisp-unit))
+	       :my-utils
+	       :collision-integrals
+	       :physics-constants
+	       ))
 
 (asdf:defsystem gas-kinetic-formulary-user
   :components
-  ((:module "gkfu-setup"
+  ((:module "user-setup"
 	    :pathname "./"
 	    :components
-	    ((:file "gkf-user-package-def")
-	     (:file "gkf-user-setup")))
-   (:module "gkf-user"
+	    ((:file "user-package-def")
+	     (:file "user-setup")))
+   (:module "user"
 	    :pathname "./"
-	    :depends-on ("gkfu-setup")
+	    :depends-on ("user-setup")
 	    :components
-	    ((:file "gkf-user"))))
-  :depends-on (:gas-kinetic-formulary
-	       :mv-grid-utils
-	       :mv-gnuplot))
+	    ((:file "McCormack-transport-coeffs-user"))))
+  :depends-on (#:gas-kinetic-formulary
+	       #:mv-grid-utils
+	       #:mv-gnuplot
+	       #:lisp-unit
+	       #:defgeneric+default))

@@ -1,5 +1,5 @@
 ;; Mirko Vukovic
-;; Time-stamp: <2012-06-06 09:31:42 abbrevs+defs.lisp>
+;; Time-stamp: <2011-10-16 19:53:37 user-package-def.lisp>
 ;; 
 ;; Copyright 2011 Mirko Vukovic
 ;; Distributed under the terms of the GNU General Public License
@@ -17,16 +17,11 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(in-package :gas-kinetic-formulary)
-
-
-(export '(+kb+ +R+ +T0+ +P0+ +amu+ +V-molar@STP+))
-
-(defconstant +kb+ physics-constants:+boltzmann-constant-SP+)
-(defconstant +R+ physics-constants:+gas-constant-SP+)
-(defconstant +T0+ physics-constants:+standard-temperature-SP+)
-(defconstant +P0+ physics-constants:+standard-pressure-SP+)
-(defconstant +amu+ physics-constants:+atomic-mass-unit-SP+)
-(defconstant +A+ physics-constants:+avogadros-number-sp+)
-(defconstant +V-molar@STP+ (/ (* +R+ +T0+) +P0+))
-(defconstant +pi+ (coerce pi 'double-float))
+(defpackage :gas-kinetic-formulary-user
+  (:nicknames :gkf-user)
+  (:use :cl :gas-kinetic-formulary :collision-integrals
+	:molecular-potentials :lisp-unit
+	:mv-grid :mv-gnuplot )
+  (:documentation "Template package for deploying applications on top of the
+gas-kinetic-formulary.  It also includes helpful packages such as
+mv-grid and mv-gnuplot"))

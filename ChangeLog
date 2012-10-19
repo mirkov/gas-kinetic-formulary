@@ -1,3 +1,39 @@
+2012-07-27  Mirko Vukovic  <mirko.vukovic@us.tel.com>
+
+	* fundamental-parameters.lisp (lambda-mfp): Replaced pi with +pi+
+	(lambda-mfp-ilt-mu, lambda-mfp-ilt-kappa): New functions
+
+2012-07-12  Mirko Vukovic  <mirko.vukovic@us.tel.com>
+
+	* fundamental-parameters.lisp (delta-3): Added one more
+	formulation, this one identical to the definition of Sharipov
+
+	* mixture-parameters.lisp (mixture-mass-coeff1): Added
+
+2012-06-06  Mirko Vukovic  <mirko.vukovic@us.tel.com>
+
+	* speeds.lisp: Replaced all uses of "pi" with "+pi+"
+
+	* conductances.lisp: I removed the circular orifice conductance,
+	because it now part of a stand-alone package.  The reason I moved
+	it there was that it was a single stand-alone formula, independent
+	of other packages.  I may revisit that at a later date.
+	(Cc-fm): Added circular orifice conductance in free-molecular
+	regime.
+
+	* fundamental-parameters.lisp (Kn-1): Defined Kn-1 as function of
+	delta
+	(delta-2): Defined delta-2 as function of Kn
+	(delta-1): Renamed delta1 into delta-1 to conform to CL conventions. 
+
+	* abbrevs+defs.lisp (+pi+): Added +pi+ as double float
+	representation of pi
+
+2012-05-30  Mirko Vukovic  <mirko.vukovic@us.tel.com>
+
+	* speeds.lisp: Update documentation for all functions, and
+	standardized mass argument names
+
 2011-05-10  Mirko Vukovic  <Mirko Vukovic <mirko.vukovic@us.tel.com>>
 
 	* conductances.lisp: New file for conductance formuae

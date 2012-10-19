@@ -1,5 +1,5 @@
 ;; Mirko Vukovic
-;; Time-stamp: <2011-02-22 09:59:06 gas-kinetic-formulary-package-def.lisp>
+;; Time-stamp: <2012-05-25 22:33:50 gas-kinetic-formulary-package-def.lisp>
 ;; 
 ;; Copyright 2011 Mirko Vukovic
 ;; Distributed under the terms of the GNU General Public License
@@ -43,15 +43,18 @@
 
 (defpackage :tokyo-electron.mv.gas-kinetic-formulary
   (:nicknames :gas-kinetic-formulary :gkf)
-  (:use :common-lisp :lisp-unit)
+  (:use :common-lisp :lisp-unit #|:defgeneric+default|#
+	:collision-integrals :molecular-potentials)
   (:import-from :my-utils
 		:^2
 		:1/
 		:^3)
+  (:import-from :split-sequence :split-sequence)
+  (:import-from :alexandria :symbolicate)
   (:export
    :gas-number-density ;; depreciated function, leaves informative message
    ))
 
 
 (defpackage :gas-kinetic-formulary-unit-tests
-  (:use :cl :gas-kinetic-formulary :lisp-unit :my-lisp-unit :my-utils))
+  (:use :cl :gas-kinetic-formulary :lisp-unit #|:my-lisp-unit|# :my-utils))
